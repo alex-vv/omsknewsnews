@@ -8,6 +8,31 @@
 
 ## Сайт
 
-web - сайт на next.js / PostgreSQL с поиском по загруженным статьям
+в каталоге web - сайт на next.js / PostgreSQL с поиском по загруженным статьям
 
+## Примерный workflow
 
+установка зависимостей:
+```
+python3 -m venv .venv
+.venv/bin/pip install --upgrade pip
+.venv/bin/pip install -r requirements.txt
+```
+
+скачивание с web archive:
+
+```
+nohup caffeinate -i ruby download_omsknews.rb > download.log 2>&1
+```
+
+конвертация в json:
+
+```
+.venv/bin/python parse.py "target/omsknews.ru" articles.json
+```
+
+закачка в базу:
+
+```
+DATABASE_URL=<POSTGRESQL_DB_URL> \ .venv/bin/python load_db.py articles.json
+```
