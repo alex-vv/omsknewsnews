@@ -8,7 +8,7 @@
 # stay well inside Wayback Machine's rate limits.
 #
 # Usage:
-#   ruby download_omsknews.rb
+#   ruby download.rb
 #
 # Environment overrides:
 #   WAYBACK_DELAY       seconds to sleep between requests (default 2.0)

@@ -22,7 +22,7 @@ python3 -m venv .venv
 скачивание с web archive:
 
 ```
-nohup caffeinate -i ruby download_omsknews.rb > download.log 2>&1
+nohup caffeinate -i ruby download.rb > download.log 2>&1
 ```
 
 конвертация в json:
