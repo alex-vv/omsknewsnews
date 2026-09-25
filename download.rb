@@ -14,7 +14,7 @@
 #   WAYBACK_DELAY       seconds to sleep between requests (default 2.0)
 #   WAYBACK_RETRIES     retries per API request on transient errors (default 6)
 #   WAYBACK_SKIP_REPORT print a skip counter every N skipped files (default 100)
-#   WAYBACK_DIR         output directory (default websites/omsknews.ru)
+#   WAYBACK_DIR         output directory (default target/omsknews.ru)
 #   WAYBACK_FROM        start timestamp (default 20010101000000)
 #   WAYBACK_TO          end timestamp   (default: current date/time)
 
@@ -132,7 +132,7 @@ end
 
 options = {
   base_url: ENV['WAYBACK_URL'] || 'http://omsknews.ru',
-  directory: ENV['WAYBACK_DIR'] || 'websites/omsknews.ru',
+  directory: ENV['WAYBACK_DIR'] || 'target/omsknews.ru',
   from_timestamp: (ENV['WAYBACK_FROM'] || '20010101000000').to_i,
   to_timestamp: (ENV['WAYBACK_TO'] || Time.now.strftime('%Y%m%d%H%M%S')).to_i,
   threads_count: 1
