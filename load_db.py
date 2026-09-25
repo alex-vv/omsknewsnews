@@ -14,14 +14,8 @@ ON CONFLICT (published, title) DO NOTHING
 """
 
 
-def connection_kwargs():
-    return {
-        "host": os.environ["PGHOST"],
-        "port": os.environ["PGPORT"],
-        "dbname": os.environ["PGDATABASE"],
-        "user": os.environ["PGUSER"],
-        "password": os.environ["PGPASSWORD"],
-    }
+def database_url():
+    return os.environ["DATABASE_URL"]
 
 
 def load_articles(path):
@@ -49,7 +43,7 @@ def main():
     path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_INPUT
     articles = load_articles(path)
     rows = to_rows(articles)
-    with psycopg.connect(**connection_kwargs()) as conn:
+    with psycopg.connect(database_url()) as conn:
         with conn.cursor() as cur:
             cur.execute("TRUNCATE TABLE articles RESTART IDENTITY")
             cur.executemany(INSERT, rows)
