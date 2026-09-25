@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 function Search() {
   const router = useRouter();
@@ -88,7 +89,7 @@ function Search() {
     window.scrollTo({ top: 0 });
   }
 
-  function openArticle(id) {
+  function articleHref(id) {
     const params = new URLSearchParams();
     if (urlQuery) {
       params.set("q", urlQuery);
@@ -97,7 +98,7 @@ function Search() {
       params.set("page", String(urlPage));
     }
     const suffix = params.toString();
-    router.push(`/articles/${id}${suffix ? `?${suffix}` : ""}`);
+    return `/articles/${id}${suffix ? `?${suffix}` : ""}`;
   }
 
   return (
@@ -128,17 +129,15 @@ function Search() {
 
       <ul className="results">
         {results.map((result) => (
-          <li
-            key={result.id}
-            className="result"
-            onClick={() => openArticle(result.id)}
-          >
-            <h2>{result.title}</h2>
-            <div className="article-meta">
-              {result.published && <span>Опубликовано: {result.published}</span>}
-              {result.source && <span>Источник: {result.source}</span>}
-            </div>
-            <p dangerouslySetInnerHTML={{ __html: result.excerpt }} />
+          <li key={result.id} className="result">
+            <Link className="result-link" href={articleHref(result.id)}>
+              <h2>{result.title}</h2>
+              <div className="article-meta">
+                {result.published && <span>Опубликовано: {result.published}</span>}
+                {result.source && <span>Источник: {result.source}</span>}
+              </div>
+              <p dangerouslySetInnerHTML={{ __html: result.excerpt }} />
+            </Link>
           </li>
         ))}
       </ul>
