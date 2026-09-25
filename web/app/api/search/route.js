@@ -61,6 +61,12 @@ export async function GET(request) {
     const { rows } = await pool.query(searchSql, [term, PAGE_SIZE, offset]);
     return Response.json({ results: rows, page, total, totalPages });
   } catch (error) {
+    console.error('DB Error Details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      stack: error.stack
+    });
     return Response.json({ error: error.message }, { status: 500 });
   }
 }

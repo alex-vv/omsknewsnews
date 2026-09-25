@@ -23,6 +23,12 @@ export async function GET(request, { params }) {
     }
     return Response.json({ article: rows[0] });
   } catch (error) {
+    console.error('DB Error Details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      stack: error.stack
+    });
     return Response.json({ error: error.message }, { status: 500 });
   }
 }
