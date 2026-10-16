@@ -2,6 +2,8 @@
 
 ## Скрипты 
 
+в каталоге scripts/
+
  - download.rb - загрузка из Wayback Machine
  - parse.py - парсинг загруженных страниц, преобразование в json
  - load_db.py - загрузка полученного json в PostgreSQL
@@ -22,17 +24,17 @@ python3 -m venv .venv
 скачивание с web archive:
 
 ```
-nohup caffeinate -i ruby download.rb > download.log 2>&1
+nohup caffeinate -i ruby scripts/download.rb > download.log 2>&1
 ```
 
 конвертация в json:
 
 ```
-.venv/bin/python parse.py "target/omsknews.ru" articles.json
+.venv/bin/python scripts/parse.py "target/omsknews.ru" articles.json
 ```
 
 закачка в базу:
 
 ```
-DATABASE_URL=<POSTGRESQL_DB_URL> \ .venv/bin/python load_db.py articles.json
+DATABASE_URL=<POSTGRESQL_DB_URL> \ .venv/bin/python scripts/load_db.py articles.json
 ```
