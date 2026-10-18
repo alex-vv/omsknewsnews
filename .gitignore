@@ -6,6 +6,8 @@ node_modules/
 articles.json
 errors.log
 target/
+.quarkus/
+.DS_Store
 
 #Maven
 target/

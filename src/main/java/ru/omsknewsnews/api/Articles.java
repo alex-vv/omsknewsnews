@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.jboss.resteasy.reactive.RestQuery;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.reflect.ConstructorMapper;
@@ -22,9 +23,11 @@ public class Articles {
     @Inject
     Jdbi jdbi;
 
+    @RegisterForReflection
     public record Article(Long id, String title, LocalDate published, String source, String excerpt) {
     }
 
+    @RegisterForReflection
     public record ArticleFull(
             Long id,
             String title,
