@@ -12,8 +12,17 @@ function parse() {
 
 export const route = writable(parse());
 
+function track() {
+  if (window.goatcounter?.count) {
+    window.goatcounter.count({
+      path: location.pathname || "/",
+    });
+  }
+}
+
 window.addEventListener("popstate", () => {
   route.set(parse());
+  track();
 });
 
 export function navigate(to, { replace = false } = {}) {
@@ -23,6 +32,7 @@ export function navigate(to, { replace = false } = {}) {
     window.history.pushState(null, "", to);
   }
   route.set(parse());
+  track();
 }
 
 export function isPlainLeftClick(event) {
