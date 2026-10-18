@@ -1,0 +1,19 @@
+services:
+  db:
+    image: docker.io/library/postgres:18
+    ports:
+      - '5432'
+    environment:
+      POSTGRES_USER: omsknewsnews
+      POSTGRES_PASSWORD: omsknewsnews
+      POSTGRES_DB: omsknewsnews
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U omsknewsnews -d omsknewsnews"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - omsknewsnewsdev-pgdata:/var/lib/postgresql
+
+volumes:
+  omsknewsnewsdev-pgdata:

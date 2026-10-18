@@ -10,7 +10,19 @@
 
 ## Сайт
 
-в каталоге web - сайт на next.js / PostgreSQL с поиском по загруженным статьям
+в каталоге web - Svelte-фронтенд (собирается Quarkus web-bundler), API и БД - PostgreSQL через Quarkus
+
+### запуск prod
+
+```
+mvn package
+```
+
+```
+QUARKUS_DATASOURCE_JDBC_URL='jdbc:postgresql://localhost:5432/omsknewsnews?user=omsknewsnews' \
+QUARKUS_DATASOURCE_PASSWORD='<пароль>' \
+java -jar target/quarkus-app/quarkus-run.jar
+```
 
 ## Примерный workflow
 
@@ -36,5 +48,6 @@ nohup caffeinate -i ruby scripts/download.rb > download.log 2>&1
 закачка в базу:
 
 ```
-DATABASE_URL=<POSTGRESQL_DB_URL> \ .venv/bin/python scripts/load_db.py articles.json
+DATABASE_URL='postgresql://omsknewsnews:<пароль>@localhost:5432/omsknewsnews' \
+  .venv/bin/python scripts/load_db.py articles.json
 ```
