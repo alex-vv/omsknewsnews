@@ -14,8 +14,10 @@
 
 ### запуск prod
 
+Требуется JDK 25. Используйте `./mvnw` (или задайте `JAVA_HOME` на JDK 25):
+
 ```
-mvn package
+./mvnw package
 ```
 
 ```
